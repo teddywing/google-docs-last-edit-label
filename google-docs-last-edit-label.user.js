@@ -3,7 +3,6 @@
 // @description Show a tooltip when hovering over the last edit time label
 // @namespace com.teddywing
 // @version 0.0.1
-// @run-at document-idle
 // @match https://docs.google.com/*
 // ==/UserScript==
 
@@ -23,5 +22,23 @@
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
+var observer = new MutationObserver(
+	function(mutation_list) {
+		for (var i = 0; i < mutation_list.length; i++) {
+			var mutation = mutation_list[i];
+			var last_edit_label = mutation.target;
+
+			last_edit_label.setAttribute('title', last_edit_label.textContent);
+
+			return;
+		}
+	}
+);
+
 var last_edit_label = document.querySelector('.docs-title-save-label-text');
-last_edit_label.setAttribute('title', last_edit_label.textContent);
+observer.observe(
+	last_edit_label,
+	{
+		childList: true
+	}
+);
