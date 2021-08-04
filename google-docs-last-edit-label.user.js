@@ -3,6 +3,7 @@
 // @description Show a tooltip when hovering over the last edit time label
 // @namespace com.teddywing
 // @version 0.0.1
+// @run-at document-idle
 // @match https://docs.google.com/*
 // ==/UserScript==
 
